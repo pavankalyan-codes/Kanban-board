@@ -1,0 +1,11 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.mat-toolbar {
+    background: teal;
+    color: #fff
+ }
+ button:focus, button:active:focus, button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+    }

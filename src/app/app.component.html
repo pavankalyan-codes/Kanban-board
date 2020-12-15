@@ -1,66 +1,101 @@
-<div>
-  <div class="d-flex justify-content-center">
-    <h1>Welcome to Kanban Boards</h1>
-  </div>
-  <div>
-    <input class="ml-2" [(ngModel)]="task" type="text"> 
-    <button class="btn ml-4 btn-primary" (click)="addTask()" >Add</button>
-  </div>
-  <div class="mt-3">
-    <input class="ml-2" disabled [(ngModel)]="currentTask" type="text" > 
-    <button [disabled]="(indexOfList-1<=-1)==true" class="btn ml-4 btn-warning" (click)="moveBack(currentTask)">Move Back</button> 
-    <button [disabled]="(currentTask=='' || indexOfList+1>=4)==true" class="btn ml-4 btn-info" (click)="moveForward(currentTask)" >Move Forward</button>
-    <button [disabled]="(currentTask=='')==true" class="btn ml-4 btn-danger" (click)="delete(currentTask)">Delete</button>
-  </div>
+<div >
+  <app-mytoolbar (messageEvent)="receiveMessage($event)"></app-mytoolbar>
 
+  <!-- <div class="container mt-2" style="display: flex;flex-direction: row;justify-content: center;">
+    <form class="form-inline">
+      <button mat-raised-button color="primary" type="submit" (click)="openDialog()" class="btn btn-default">Add Task</button>
+    </form>
+  </div>
+   -->
 
-  <div class="row mt-5">
-    <div class="col-sm-3 ">
-      <div class="card ml-2" style="background-color: rgb(204, 204, 204);">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-center"><strong>Backlog</strong></h5>
-
-          <div *ngFor="let task of allTask[0]">
-            <button class="btn" (click)="manage(0,task)" style="margin-top: 10px;background-color: #fff; display: block;width: 100%;">{{task}}</button>
-          </div>
-          
-        </div>
-      </div>
-    </div>
+  
+  <div cdkDropListGroup class="mt-3" style="display: flex;flex-direction: row;justify-content: center;">
     
-    <div class="col-sm-3">
-      <div class="card" style="background-color: rgb(204, 204, 204);">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-center"><strong>To Do</strong></h5>
-            <div *ngFor="let task of allTask[1]">
-              <button *ngIf="task!==''" class="btn" (click)="manage(1,task)" style="margin-top: 10px;background-color: #fff; display: block;width: 100%;">{{task}}</button>
-            </div>
+    <div class="example-container" >
+      <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
+        
+        <div class="myheader" style="display: flex;flex-direction: row;justify-content: center;">
+          <mat-card-header style="padding: 10px;" >
+            <mat-icon >new_releases</mat-icon>
+            <mat-card-title >Backlog</mat-card-title>
+          </mat-card-header>    
+
         </div>
-      </div>
+
+           
+            <div class="pt-2">
+              <mat-card class="myc"  *ngFor="let item of backlog" style="display: flex;flex-direction: column;margin-bottom: 10px" cdkDrag>
+              <div class="mycard"></div>
+                <div style="padding: 20px; overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;">{{item}} </div>
+              </mat-card>
+            </div>
+      </mat-card>
+    </div>
+  
+    
+    <div class="example-container">
+      <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
+       
+        <div class="myheadertodo" style="display: flex;flex-direction: row;justify-content: center;">
+          <mat-card-header style="padding: 10px;">
+            <mat-icon >assignment_turned_in          </mat-icon>
+            <mat-card-title >To Do</mat-card-title>
+          </mat-card-header>     
+        </div>   
+            <div class="pt-2">
+              <mat-card class="myc" *ngFor="let item of todo" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+                <div class="mycardtodo"></div>
+                <div style="padding: 20px;max-width: 100%; overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;">{{item}}</div>
+                
+              </mat-card>
+            </div>
+      </mat-card>
     </div>
 
-    <div class="col-sm-3">
-      <div class="card" style="background-color: rgb(204, 204, 204);">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-center"><strong>Ongoing</strong></h5>
-            <div *ngFor="let task of allTask[2]">
-              <button *ngIf="task!==''" class="btn" (click)="manage(2,task)" style="margin-top: 10px;background-color: #fff; display: block;width: 100%;">{{task}}</button>
+    <div class="example-container">
+      <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)" >
+        
+        <div class="myheaderongoing" style="display: flex;flex-direction: row;justify-content: center;">
+          <mat-card-header style="padding: 10px;">
+            <mat-icon >read_more</mat-icon>
+            <mat-card-title >Ongoing</mat-card-title>
+          </mat-card-header>  
+        </div>      
+            <div class="pt-2">
+              <mat-card class="myc"  *ngFor="let item of ongoing" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+                <div class="mycardongoing"></div>
+                <div style="padding: 20px; overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;">{{item}} </div>
+                
+              </mat-card>
             </div>
-        </div>
-      </div>
+      </mat-card>
     </div>
 
-    <div class="col-sm-3">
-      <div class="card mr-2" style="background-color: rgb(204, 204, 204);">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-center"><strong>Done</strong></h5>
-            <div *ngFor="let task of allTask[3]">
-              <button *ngIf="task!==''" class="btn" (click)="manage(3,task)" style="margin-top: 10px;background-color: #fff; display: block;width: 100%;">{{task}}</button>
+    <div class="example-container">
+      <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
+        <div class="myheaderdone" style="display: flex;flex-direction: row;justify-content: center;">
+          <mat-card-header style="padding: 10px;">
+            <mat-icon >done_outline</mat-icon>
+            <mat-card-title >Done</mat-card-title>
+          </mat-card-header> 
+        </div>       
+            <div class="pt-2">
+              <mat-card class="myc" *ngFor="let item of done" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+                <div class="mycarddone"></div>
+                <div style="padding: 20px; overflow-wrap: break-word;
+                word-wrap: break-word;
+                hyphens: auto;">{{item}} </div>
+                
+              </mat-card>
             </div>
-        </div>
-      </div>
-    </div>
+      </mat-card>
+
   </div>
-
 
 </div>
