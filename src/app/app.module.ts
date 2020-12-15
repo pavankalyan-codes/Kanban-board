@@ -18,6 +18,7 @@ import { MytoolbarComponent } from './mytoolbar/mytoolbar.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddtaskComponent } from './addtask/addtask.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MatSelectModule} from '@angular/material/select';
     DragDropModule,
     MatButtonModule,
     MatDividerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+
+export interface task {
+  name: string;
+  type: string;
+}
 @Component({
   selector: 'app-addtask',
   templateUrl: './addtask.component.html',
@@ -12,6 +18,8 @@ export class AddtaskComponent implements OnInit {
     name:'',
     type:''
   }
+
+  
   types=[
     "backlog",
     "todo",
@@ -20,7 +28,23 @@ export class AddtaskComponent implements OnInit {
   ]
   value:string='';
 
-  constructor() { }
+  disableSelect:boolean=false;
+
+  constructor(public dialogRef: MatDialogRef<AddtaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: task) { 
+
+      if(data.name!='')
+      {
+        this.disableSelect=true;
+      }
+      this.task.name=data.name;
+      this.task.type=data.type+1;
+      console.log(data);
+      
+      
+      
+
+  }
 
 
   ngOnInit(): void {

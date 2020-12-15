@@ -15,16 +15,16 @@
       <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
         
         <div class="myheader" style="display: flex;flex-direction: row;justify-content: center;">
-          <mat-card-header style="padding: 10px;" >
-            <mat-icon >new_releases</mat-icon>
-            <mat-card-title >Backlog</mat-card-title>
+          <mat-card-header style="padding: 15px;" >
+            <mat-icon class="ml-2">new_releases</mat-icon>
+            <mat-card-title [matBadge]="backlog.length" matBadgeColor="warn" matBadgeOverlap="false" >Backlog</mat-card-title>
           </mat-card-header>    
 
         </div>
 
            
             <div class="pt-2">
-              <mat-card class="myc"  *ngFor="let item of backlog" style="display: flex;flex-direction: column;margin-bottom: 10px" cdkDrag>
+              <mat-card class="myc"  *ngFor="let item of backlog;let i=index" [id]="i" (dblclick)="doubleClick(0,$event)"style="display: flex;flex-direction: column;margin-bottom: 10px" cdkDrag>
               <div class="mycard"></div>
                 <div style="padding: 20px; overflow-wrap: break-word;
                 word-wrap: break-word;
@@ -39,13 +39,13 @@
       <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
        
         <div class="myheadertodo" style="display: flex;flex-direction: row;justify-content: center;">
-          <mat-card-header style="padding: 10px;">
-            <mat-icon >assignment_turned_in          </mat-icon>
-            <mat-card-title >To Do</mat-card-title>
+          <mat-card-header style="padding: 15px;" >
+            <mat-icon class="ml-2" >assignment_turned_in          </mat-icon>
+            <mat-card-title [matBadge]="todo.length" matBadgeColor="warn" matBadgeOverlap="false">To Do</mat-card-title>
           </mat-card-header>     
         </div>   
             <div class="pt-2">
-              <mat-card class="myc" *ngFor="let item of todo" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+              <mat-card class="myc"  *ngFor="let item of todo;let i=index" [id]="i" (dblclick)="doubleClick(1,$event)" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
                 <div class="mycardtodo"></div>
                 <div style="padding: 20px;max-width: 100%; overflow-wrap: break-word;
                 word-wrap: break-word;
@@ -60,13 +60,13 @@
       <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)" >
         
         <div class="myheaderongoing" style="display: flex;flex-direction: row;justify-content: center;">
-          <mat-card-header style="padding: 10px;">
-            <mat-icon >read_more</mat-icon>
-            <mat-card-title >Ongoing</mat-card-title>
+          <mat-card-header style="padding: 15px;">
+            <mat-icon class="ml-2">read_more</mat-icon>
+            <mat-card-title [matBadge]="ongoing.length" matBadgeColor="warn" matBadgeOverlap="false">Ongoing</mat-card-title>
           </mat-card-header>  
         </div>      
             <div class="pt-2">
-              <mat-card class="myc"  *ngFor="let item of ongoing" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+              <mat-card class="myc"  *ngFor="let item of ongoing;let i=index" [id]="i" (dblclick)="doubleClick(2,$event)" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
                 <div class="mycardongoing"></div>
                 <div style="padding: 20px; overflow-wrap: break-word;
                 word-wrap: break-word;
@@ -80,13 +80,13 @@
     <div class="example-container">
       <mat-card class="example-card" style="display: flex;flex-direction: column;background-color: rgba(252, 248, 32, 0.151);" cdkDropList [cdkDropListData]="done" (cdkDropListDropped)="drop($event)">
         <div class="myheaderdone" style="display: flex;flex-direction: row;justify-content: center;">
-          <mat-card-header style="padding: 10px;">
-            <mat-icon >done_outline</mat-icon>
-            <mat-card-title >Done</mat-card-title>
+          <mat-card-header style="padding: 15px;">
+            <mat-icon class="ml-2">done_outline</mat-icon>
+            <mat-card-title [matBadge]="done.length" matBadgeColor="warn" matBadgeOverlap="false">Done</mat-card-title>
           </mat-card-header> 
         </div>       
             <div class="pt-2">
-              <mat-card class="myc" *ngFor="let item of done" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
+              <mat-card class="myc" *ngFor="let item of done;let i=index" [id]="i" (dblclick)="doubleClick(3,$event)" style="margin-bottom: 10px;display: flex;flex-direction: column;" cdkDrag>
                 <div class="mycarddone"></div>
                 <div style="padding: 20px; overflow-wrap: break-word;
                 word-wrap: break-word;

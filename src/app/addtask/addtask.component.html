@@ -4,11 +4,11 @@
     <div mat-dialog-content style="display:flex;flex-direction: column;justify-content: center;">
     <mat-form-field >
         <mat-label>Task name</mat-label>
-        <input matInput [(ngModel)]="task.name" required>
+        <input matInput [(ngModel)]="task.name"  required>
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Task Category</mat-label>
-        <mat-select [(ngModel)]="task.type" required>
+        <mat-select [(ngModel)]="task.type" required [disabled]="disableSelect">
         <mat-option *ngFor="let type of types;let i=index" [value]="i+1">
             {{type}}
         </mat-option>

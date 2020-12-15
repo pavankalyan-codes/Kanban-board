@@ -27,23 +27,96 @@ export class AppComponent {
   mf:boolean=true;
   dl:boolean=false;
 
-  backlog=["Learn Angular","Watch Tenet tonight"];
-  todo=["Master CSS","John Doe","John Wick"];
-  ongoing=["Learn Angular Material"];
-  done=["Anuglar Components"];
+  backlog=[];
+  todo=[];
+  ongoing=[];
+  done=[];
 
 
   constructor(public dialog: MatDialog){
     
+  }
+  doubleClick(type,event)
+  {
+    console.log(type+" "+event.currentTarget.id);
+    let na=this.getValue(type,event.currentTarget.id);
+    console.log(na);
+    
+    this.editTodo(event.currentTarget.id,na,type)
+
+    
+  }
+
+  getValue(type,ind)
+  {
+    console.log(this.todo);
+    
+    switch(type)
+    {
+      case 0:
+        return this.backlog[ind];
+      case 1:
+        return this.todo[parseInt(ind)];       
+      case 2:
+        return this.ongoing[ind];      
+      case 3:
+        return this.done[ind];        
+      default:
+        return 'error'; 
+    }
   }
 
   receiveMessage($event) {
     this.openDialog();
   }
 
+  editTodo(arrIndex,tname,ttype): void {
+    const dialogRef = this.dialog.open(AddtaskComponent, {
+      width: '400px',
+      data:{
+        
+          name:tname,
+          type:ttype
+        
+      }
+      
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.updateTask(ttype,arrIndex,result);
+      
+      
+    });
+  }
+
+  updateTask(type,ind,result)
+  {
+    switch(type)
+    {
+      case 0:
+        return this.backlog[parseInt(ind)]=result.name;
+      case 1:
+        return this.todo[parseInt(ind)]=result.name;       
+      case 2:
+        return this.ongoing[parseInt(ind)]=result.name;         
+      case 3:
+        return this.done[parseInt(ind)]=result.name;        
+      default:
+        return 'error'; 
+    }
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddtaskComponent, {
       width: '400px',
+      data:{
+        
+        name:"",
+        type:""
+      
+    }
       
     });
 
