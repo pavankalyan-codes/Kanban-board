@@ -3,6 +3,8 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { AddtaskComponent } from './addtask/addtask.component';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 
 @Component({
@@ -13,6 +15,10 @@ import { TooltipPosition } from '@angular/material/tooltip';
 export class AppComponent {
   
   title = 'KanbanBoard';
+
+  durationInSeconds = 1;
+
+  snackbarMessage:string='';
 
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
 
@@ -43,7 +49,7 @@ export class AppComponent {
   done=[];
 
 
-  constructor(public dialog: MatDialog){
+  constructor(public dialog: MatDialog,private _snackBar: MatSnackBar){
     
   }
   doubleClick(type,event)
@@ -89,6 +95,7 @@ export class AppComponent {
         console.log('The dialog was closed');
         console.log(result);
         this.updateTask(ttype,arrIndex,result);
+        
       });
     }
 
@@ -111,24 +118,45 @@ export class AppComponent {
   }
 
   updateTask(type,ind,result){
+      if(result==undefined)
+        return -1;
+
       if(result!== undefined && result.name === '')
       {
-        return this.deleteTodo(type,ind);
+        this.setSnackbarSuccessMessage("Deleted Successfully")
+        this.openSnackBar();
+        this.deleteTodo(type,ind);
+        return "deleted";
         
       }
+      if(this.alreadyExist(result.name))
+      {
+        this.setSnackbarSuccessMessage("Duplicate Todo!!! Unable to Update")
+        this.openSnackBar();
+        return "exist";
+      }
+
       switch(type)
       {
         case 0:
-          return this.backlog[parseInt(ind)]=result.name;
+          this.backlog[parseInt(ind)]=result.name;
+          break;
         case 1:
-          return this.todo[parseInt(ind)]=result.name;       
+          this.todo[parseInt(ind)]=result.name; 
+          break;      
         case 2:
-          return this.ongoing[parseInt(ind)]=result.name;         
+          this.ongoing[parseInt(ind)]=result.name;    
+          break;     
         case 3:
-          return this.done[parseInt(ind)]=result.name;        
+          this.done[parseInt(ind)]=result.name;  
+          break;      
         default:
-          return 'error'; 
+          this.setSnackbarSuccessMessage("Something went wrong");
+          this.openSnackBar();
+          return;
       }
+      this.setSnackbarSuccessMessage("Updated Task Successfully");
+      this.openSnackBar();
     }
 
   openDialog(): void {
@@ -144,6 +172,7 @@ export class AppComponent {
         console.log('The dialog was closed');
         console.log(result);
         this.addTask(result);
+        
       });
     }
 
@@ -207,7 +236,18 @@ export class AppComponent {
 
   addTask(task)
   {
-    console.log(task);
+    if(task==undefined)
+      return '';
+    console.log(task + this.alreadyExist(task.name));
+
+    if(this.alreadyExist(task.name))
+    {
+      this.setSnackbarSuccessMessage("Duplicate Todo!!! Unable to Update")
+      this.openSnackBar();
+      console.log("task already existing");
+      return '';
+      
+    }
     
     switch(task.type)
     {
@@ -224,8 +264,30 @@ export class AppComponent {
         this.done.push(task.name);
         break;
       default:
-        console.log("error");      
+        this.setSnackbarSuccessMessage("Something went wrong");
+        this.openSnackBar();
+        return '';     
     }
+    this.setSnackbarSuccessMessage("Task added Successfully");
+    this.openSnackBar();
     
+  }
+
+  setSnackbarSuccessMessage(msg){
+    this.snackbarMessage=msg;
+  }
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      duration: this.durationInSeconds * 1000,
+      data:this.snackbarMessage,
+      horizontalPosition: 'center',
+      panelClass: ['info'],
+    });
+  }
+
+  alreadyExist(name)
+  {
+    return this.backlog.includes(name) || this.todo.includes(name)
+           || this.ongoing.includes(name) || this.done.includes(name);
   }
 }

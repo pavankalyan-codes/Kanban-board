@@ -20,14 +20,18 @@ import { AddtaskComponent } from './addtask/addtask.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MytoolbarComponent,
-    AddtaskComponent
+    AddtaskComponent,
+    SnackbarComponent
   ],
   imports: [
+    MatSnackBarModule,
     MatTooltipModule,
     MatSelectModule,
     MatDialogModule,
