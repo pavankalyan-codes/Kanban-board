@@ -110,7 +110,7 @@ export class AppComponent {
         width: '400px',
         data:{
           name:"",
-          type:""
+          type:"-1"
         }
       });
 
@@ -181,6 +181,8 @@ export class AppComponent {
 
   addTask(task)
   {
+    console.log(task);
+    
     switch(task.type)
     {
       case 1:

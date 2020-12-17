@@ -38,7 +38,8 @@ export class AddtaskComponent implements OnInit {
         this.disableSelect=true;
       }
       this.task.name=data.name;
-      this.task.type=data.type+1;
+      if(data.type !== '-1')
+        this.task.type=data.type+1;
       console.log(data);
       
       
