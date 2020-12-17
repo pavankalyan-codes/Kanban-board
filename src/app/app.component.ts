@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { AddtaskComponent } from './addtask/addtask.component';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { AddtaskComponent } from './addtask/addtask.component';
 export class AppComponent {
   
   title = 'KanbanBoard';
+
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
 
   //colors
   backlogBG="rgba(255, 81, 0, 0.356)"
@@ -89,7 +92,30 @@ export class AppComponent {
       });
     }
 
+
+  deleteTodo(type,ind)
+  {
+    switch(type)
+      {
+        case 0:
+          return this.backlog.splice(parseInt(ind),1);
+        case 1:
+          return this.todo.splice(parseInt(ind),1);    
+        case 2:
+          return this.ongoing.splice(parseInt(ind),1);        
+        case 3:
+          return this.done.splice(parseInt(ind),1);      
+        default:
+          return 'error'; 
+      }
+  }
+
   updateTask(type,ind,result){
+      if(result!== undefined && result.name === '')
+      {
+        return this.deleteTodo(type,ind);
+        
+      }
       switch(type)
       {
         case 0:

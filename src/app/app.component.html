@@ -32,6 +32,9 @@
                 *ngFor="let item of backlog;let i=index" 
                 [id]="i" 
                 (dblclick)="doubleClick(0,$event)"
+                matTooltip="Double click to edit or delete task"
+                [matTooltipPosition]="positionOptions[3]"
+                matTooltipHideDelay="100"
                 cdkDrag >
                 <div class="mycard">
                 </div>
@@ -68,6 +71,9 @@
             *ngFor="let item of todo;let i=index" 
             [id]="i" 
             (dblclick)="doubleClick(1,$event)" 
+            matTooltip="Double click to edit or delete task"
+            [matTooltipPosition]="positionOptions[3]"
+            matTooltipHideDelay="100"
             cdkDrag>
             <div class="mycardtodo">
             </div>
@@ -103,6 +109,9 @@
                 *ngFor="let item of ongoing;let i=index" 
                 [id]="i" 
                 (dblclick)="doubleClick(2,$event)" 
+                matTooltip="Double click to edit or delete task"
+                [matTooltipPosition]="positionOptions[3]"
+                matTooltipHideDelay="100"
                 cdkDrag>
                 <div class="mycardongoing">
                 </div>
@@ -141,6 +150,9 @@
                 *ngFor="let item of done;let i=index" 
                 [id]="i" 
                 (dblclick)="doubleClick(3,$event)" 
+                matTooltip="Double click to edit or delete task"
+                [matTooltipPosition]="positionOptions[3]"
+                matTooltipHideDelay="100"
                 cdkDrag>
                 <div class="mycarddone">
                 </div>

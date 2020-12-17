@@ -28,6 +28,11 @@ export class AddtaskComponent implements OnInit {
   ]
   value:string='';
 
+  buttonName="Update Task"
+  
+
+  editingTodo:boolean=true;
+
   disableSelect:boolean=false;
 
   constructor(public dialogRef: MatDialogRef<AddtaskComponent>,
@@ -38,8 +43,17 @@ export class AddtaskComponent implements OnInit {
         this.disableSelect=true;
       }
       this.task.name=data.name;
-      if(data.type !== '-1')
+      if(data.type === '-1')
+      {
+        this.editingTodo=false;
+        this.buttonName="Add Task"
+      }
+      else
+      {
         this.task.type=data.type+1;
+        this.editingTodo=true;
+      }
+        
       console.log(data);
       
       

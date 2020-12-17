@@ -27,7 +27,14 @@
             mat-raised-button 
             [mat-dialog-close]="task" 
             color="accent">
-            Add Task
+            {{buttonName}}
+        </button>
+        <button 
+            *ngIf="editingTodo"
+            mat-raised-button 
+            [mat-dialog-close]="{name:'',type:''}" 
+            color="warn">
+            Delete
         </button>
     </div>
 </div>
