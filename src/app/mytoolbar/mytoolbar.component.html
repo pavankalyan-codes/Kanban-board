@@ -1,18 +1,27 @@
 <mat-toolbar >
-    
-    <img src="assets/images/kanban3.png" width="50px" alt="KanBan"/>
-
-  
+  <img src="assets/images/kanban3.png" width="50px" alt="KanBan"/>
   <span>KanBan Board</span>
   <span class="example-spacer"></span>
-  <button (click)="addTask()" mat-mini-fab style="background-color: rgb(248, 174, 14);" aria-label="Example icon button with a plus one icon">
-    <mat-icon >plus_one</mat-icon>
+
+  <!-- Add task fab button -->
+  <button  mat-raised-button class="addTask" (click)="addTask()" mat-mini-fab #tooltip="matTooltip"
+  matTooltip="Click to add Task"
+  [matTooltipPosition]="positionOptions[0]"
+  matTooltipHideDelay="100">
+    <mat-icon  [ngStyle]="{'color': 'black'}">add</mat-icon>
   </button> 
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon  [ngStyle]="{'color': mycolor}" (click)="changeColor()" >favorite</mat-icon>
+
+  <!-- Like fab button -->
+  <button mat-icon-button class="example-icon favorite-icon">
+    <mat-icon class="df"  [ngStyle]="{'color': mycolor}" (click)="changeColor()" >
+      favorite
+    </mat-icon>
   </button>
 
+  <!-- Share fab button -->
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
+    <mat-icon>
+      share
+    </mat-icon>
   </button>
 </mat-toolbar>

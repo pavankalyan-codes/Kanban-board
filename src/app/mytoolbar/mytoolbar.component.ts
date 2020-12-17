@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import { TooltipPosition } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-mytoolbar',
@@ -9,6 +10,8 @@ import {NgForm} from '@angular/forms';
 export class MytoolbarComponent implements OnInit {
 
   mycolor='red';
+
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   constructor() { }
 
   ngOnInit(): void {

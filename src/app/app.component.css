@@ -1,21 +1,27 @@
+.dropListGroup{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 .example-container {
     width: 250px;
     max-width: 100%;
     margin: 0 25px 25px 0;
     display: inline-block;
     vertical-align: top;
-  }
+}
   
-  .example-list {
+.example-list {
     border: solid 1px #ccc;
     min-height: 60px;
     background: white;
     border-radius: 4px;
     overflow: hidden;
     display: block;
-  }
+}
   
-  .example-box {
+.example-box {
     padding: 20px 10px;
     border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
@@ -27,104 +33,91 @@
     cursor: move;
     background: white;
     font-size: 14px;
-  }
+}
   
-  .cdk-drag-preview {
+.cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
                 0 8px 10px 1px rgba(0, 0, 0, 0.14),
                 0 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
+}
   
-  .cdk-drag-placeholder {
+.cdk-drag-placeholder {
     opacity: 0;
-  }
+}
   
-  .cdk-drag-animating {
+.cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+}
   
-  .example-box:last-child {
+.example-box:last-child {
     border: none;
-  }
+}
   
-  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
-  .example-card {
+}
+.example-card {
     max-width: 400px;
     padding: 0px;
     min-height: 500px;
-  }
-  .mycard
-  {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      width: 100%;
-      height: 10%;
-      background-color: rgb(255, 0, 0);
-  }
-  .mycardtodo
-  {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(252, 248, 32, 0.151);
+}
+.mycard{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 10%;
+    background-color: rgb(255, 0, 0);
+}
+.mycardtodo{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 100%;
     height: 10%;
       background-color: rgba(17, 0, 255, 0.356);
-  }
-  .mycardongoing
-  {
+}
+.mycardongoing{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 100%;
     height: 10%;
       background-color: rgba(255, 196, 0, 0.781);
-  }
-  .mycarddone
-  {
+}
+.mycarddone{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     width: 100%;
     height: 10%;
-      background-color: rgb(15, 165, 23);
+    background-color: rgb(15, 165, 23);
   }
 .myheader{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-      height: 60px;
-      width: 100%;
-      background-color: rgba(255, 81, 0, 0.356);
+    height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
       
 }
-.myheadertodo{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-      height: 60px;
-      width: 100%;
-      background-color: rgba(17, 0, 255, 0.356);
-      
+mat-card-header{
+  padding: 15px;
 }
-.myheaderongoing{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-      height: 60px;
-      width: 100%;
-      background-color: rgba(255, 196, 0, 0.781);
-      
-}
-.myheaderdone{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-      height: 60px;
-      width: 100%;
-      background-color: rgba(21, 255, 0, 0.39);
-      
-}
-.myc 
-{ 
+.myc{
     margin: 5px; 
     padding: 0px;
     height: 100px;
-    
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px
+}
+.cardData{
+  padding: 20px; 
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }

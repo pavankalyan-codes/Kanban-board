@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddtaskComponent } from './addtask/addtask.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     AddtaskComponent
   ],
   imports: [
+    MatTooltipModule,
     MatSelectModule,
     MatDialogModule,
     FontAwesomeModule,
