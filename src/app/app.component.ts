@@ -50,8 +50,22 @@ export class AppComponent {
 
 
   constructor(public dialog: MatDialog,private _snackBar: MatSnackBar){
+      window.addEventListener("keyup", this.disableF5);
+      window.addEventListener("keydown", this.disableF5);
+
+      window.addEventListener("beforeunload", function (e) {
+        var confirmationMessage = "\o/dfdfd";
+        console.log("cond");
+        e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+        return confirmationMessage;              // Gecko, WebKit, Chrome <34
+    });
     
   }
+
+  disableF5(e) {
+    if ((e.which || e.keyCode) == 116) e.preventDefault(); 
+  }
+
   doubleClick(type,event)
     {
       console.log(type+" "+event.currentTarget.id);
