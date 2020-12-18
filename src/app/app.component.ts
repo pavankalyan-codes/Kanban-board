@@ -50,21 +50,26 @@ export class AppComponent {
 
 
   constructor(public dialog: MatDialog,private _snackBar: MatSnackBar){
-      window.addEventListener("keyup", this.disableF5);
-      window.addEventListener("keydown", this.disableF5);
 
-      window.addEventListener("beforeunload", function (e) {
-        var confirmationMessage = "\o/dfdfd";
-        console.log("cond");
-        e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
-        return confirmationMessage;              // Gecko, WebKit, Chrome <34
-    });
-    
-  }
+      if(localStorage.getItem('backlog') !== null)
+      {
+        this.backlog=JSON.parse(localStorage.getItem("backlog"));
+      }
+      if(localStorage.getItem('todo') !== null)
+      {
+        this.todo=JSON.parse(localStorage.getItem("todo"));
+      }
+      if(localStorage.getItem('ongoing') !== null)
+      {
+        this.ongoing=JSON.parse(localStorage.getItem("ongoing"));
+      }
+      if(localStorage.getItem('done') !== null)
+      {
+        this.done=JSON.parse(localStorage.getItem("done"));
 
-  disableF5(e) {
-    if ((e.which || e.keyCode) == 116) e.preventDefault(); 
-  }
+      }
+    }
+
 
   doubleClick(type,event)
     {
@@ -119,16 +124,17 @@ export class AppComponent {
     switch(type)
       {
         case 0:
-          return this.backlog.splice(parseInt(ind),1);
+          this.backlog.splice(parseInt(ind),1);
         case 1:
-          return this.todo.splice(parseInt(ind),1);    
+          this.todo.splice(parseInt(ind),1);    
         case 2:
-          return this.ongoing.splice(parseInt(ind),1);        
+          this.ongoing.splice(parseInt(ind),1);        
         case 3:
-          return this.done.splice(parseInt(ind),1);      
+          this.done.splice(parseInt(ind),1);      
         default:
           return 'error'; 
       }
+      this.updateLocal();
   }
 
   updateTask(type,ind,result){
@@ -142,6 +148,7 @@ export class AppComponent {
         this.setSnackbarSuccessMessage("Deleted Successfully")
         this.openSnackBar();
         this.deleteTodo(type,ind);
+        this.updateLocal();
         return "deleted";
         
       }
@@ -178,6 +185,7 @@ export class AppComponent {
           return;
       }
       this.setSnackbarSuccessMessage("Updated Task Successfully");
+      this.updateLocal();
       this.openSnackBar();
     }
 
@@ -245,6 +253,7 @@ export class AppComponent {
         default:
           console.log("error");   
       }
+      this.updateLocal();
 
   }
 
@@ -285,15 +294,19 @@ export class AppComponent {
     {
       case 1:
         this.backlog.push(task.name);
+        this.updateLocal();
         break;
       case 2:
         this.todo.push(task.name);
+        this.updateLocal();
         break;
       case 3:
         this.ongoing.push(task.name);
+        this.updateLocal();
         break;
       case 4:
         this.done.push(task.name);
+        this.updateLocal();
         break;
       default:
         this.setSnackbarSuccessMessage("Something went wrong");
@@ -322,4 +335,15 @@ export class AppComponent {
     return this.backlog.includes(name) || this.todo.includes(name)
            || this.ongoing.includes(name) || this.done.includes(name);
   }
+
+  updateLocal()
+  {
+    localStorage.setItem('backlog',JSON.stringify(this.backlog));
+    localStorage.setItem('todo',JSON.stringify(this.todo));
+    localStorage.setItem('ongoing',JSON.stringify(this.ongoing));
+    localStorage.setItem('done',JSON.stringify(this.done));
+  }
+
+
+  
 }
