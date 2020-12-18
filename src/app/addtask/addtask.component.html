@@ -23,7 +23,7 @@
     </div>
     <div mat-dialog-actions>
         <button 
-            [disabled]="task.name=='' || task.type==''" 
+            [disabled]="task.name.trim()=='' || task.type==''" 
             mat-raised-button 
             [mat-dialog-close]="task" 
             color="accent">

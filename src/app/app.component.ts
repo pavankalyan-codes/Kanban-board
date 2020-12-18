@@ -120,6 +120,8 @@ export class AppComponent {
   updateTask(type,ind,result){
       if(result==undefined)
         return -1;
+      
+      result.name=result.name.trim();
 
       if(result!== undefined && result.name === '')
       {
@@ -128,6 +130,12 @@ export class AppComponent {
         this.deleteTodo(type,ind);
         return "deleted";
         
+      }
+      if(result.name.trim()==='')
+      {
+        this.setSnackbarSuccessMessage("Unable to Update!!!")
+        this.openSnackBar();
+        return "empty";
       }
       if(this.alreadyExist(result.name))
       {
@@ -239,6 +247,16 @@ export class AppComponent {
     if(task==undefined)
       return '';
     console.log(task + this.alreadyExist(task.name));
+
+    if(task.name.trim()==='')
+    {
+      this.setSnackbarSuccessMessage("Unable to Update!!!")
+      this.openSnackBar();
+      console.log("task already existing");
+      return '';
+    }
+
+    task.name=task.name.trim();
 
     if(this.alreadyExist(task.name))
     {
