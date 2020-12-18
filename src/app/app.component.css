@@ -113,7 +113,8 @@ mat-card-header{
     height: 100px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    cursor: move;
 }
 .cardData{
   padding: 20px; 
