@@ -1,84 +1,84 @@
 <div>
-  <app-mytoolbar (messageEvent)="receiveMessage($event)">
-  </app-mytoolbar>
+  <app-mytoolbar (messageEvent)="receiveMessage($event)"> </app-mytoolbar>
 
   <!-- Draggable container -->
   <div cdkDropListGroup class="mt-3 dropListGroup">
-
     <!-- Backlog stack -->
-    <div class="example-container" >
-      <mat-card 
-        class="example-card"  
-        cdkDropList 
-        [cdkDropListData]="done" 
-        (cdkDropListDropped)="drop($event)">
-        <div class="myheader" 
-          [style.background]="backlogBG">
+    <div class="example-container">
+      <mat-card
+        class="example-card"
+        cdkDropList
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="myheader" [style.background]="backlogBG">
           <mat-card-header>
-            <mat-icon class="ml-2">
-              new_releases
-            </mat-icon>
-            <mat-card-title 
-              [matBadge]="backlog.length" 
-              matBadgeColor="warn" 
-              matBadgeOverlap="false" >
+            <mat-icon class="ml-2"> new_releases </mat-icon>
+            <mat-card-title
+              [matBadge]="backlog.length"
+              matBadgeColor="warn"
+              matBadgeOverlap="false"
+            >
               Backlog
             </mat-card-title>
-          </mat-card-header>    
+          </mat-card-header>
         </div>
 
         <div class="pt-2">
-              <mat-card class="myc"  
-                *ngFor="let item of backlog;let i=index" 
-                [id]="i" 
-                (dblclick)="doubleClick(0,$event)"
-                matTooltip="Double click to edit or delete task"
-                [matTooltipPosition]="positionOptions[3]"
-                matTooltipHideDelay="100"
-                cdkDrag >
-                <div class="mycard">
-                </div>
-                <div class="cardData">
-                  {{item}} 
-                </div>
-              </mat-card>
-        </div>
-      </mat-card>
-    </div>
-  
-    <!-- todo stack -->
-    <div class="example-container">
-      <mat-card class="example-card" 
-        cdkDropList 
-        [cdkDropListData]="done" 
-        (cdkDropListDropped)="drop($event)">
-        <div class="myheader" [style.background]="todoBG">
-          <mat-card-header>
-            <mat-icon class="ml-2" >
-              assignment_turned_in
-            </mat-icon>
-            <mat-card-title 
-              [matBadge]="todo.length" 
-              matBadgeColor="warn" 
-              matBadgeOverlap="false">
-              To Do
-            </mat-card-title>
-          </mat-card-header>     
-        </div>   
-
-        <div class="pt-2">
-          <mat-card class="myc"  
-            *ngFor="let item of todo;let i=index" 
-            [id]="i" 
-            (dblclick)="doubleClick(1,$event)" 
+          <mat-card
+            class="myc"
+            *ngFor="let item of backlog; let i = index"
+            [id]="i"
+            (dblclick)="doubleClick(0, $event)"
             matTooltip="Double click to edit or delete task"
             [matTooltipPosition]="positionOptions[3]"
             matTooltipHideDelay="100"
-            cdkDrag>
-            <div class="mycardtodo">
+            cdkDrag
+          >
+            <div class="mycard"></div>
+            <div class="cardData">
+              {{ item }}
             </div>
-            <div class="cardData" >
-                 {{item}}
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- todo stack -->
+    <div class="example-container">
+      <mat-card
+        class="example-card"
+        cdkDropList
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="myheader" [style.background]="todoBG">
+          <mat-card-header>
+            <mat-icon class="ml-2"> assignment_turned_in </mat-icon>
+            <mat-card-title
+              [matBadge]="todo.length"
+              matBadgeColor="warn"
+              matBadgeOverlap="false"
+            >
+              To Do
+            </mat-card-title>
+          </mat-card-header>
+        </div>
+
+        <div class="pt-2">
+          <mat-card
+            class="myc"
+            *ngFor="let item of todo; let i = index"
+            [id]="i"
+            (dblclick)="doubleClick(1, $event)"
+            matTooltip="Double click to edit or delete task"
+            [matTooltipPosition]="positionOptions[3]"
+            matTooltipHideDelay="100"
+            cdkDrag
+          >
+            <div class="mycardtodo"></div>
+            <div class="cardData">
+              {{ item }}
             </div>
           </mat-card>
         </div>
@@ -87,80 +87,98 @@
 
     <!-- ongoing stack -->
     <div class="example-container">
-      <mat-card class="example-card" 
-        cdkDropList 
-        [cdkDropListData]="done" 
-        (cdkDropListDropped)="drop($event)">
+      <mat-card
+        class="example-card"
+        cdkDropList
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
         <div class="myheader" [style.background]="ongoingBG">
-          <mat-card-header >
-            <mat-icon class="ml-2">
-              read_more
-            </mat-icon>
-            <mat-card-title 
-              [matBadge]="ongoing.length" 
-              matBadgeColor="warn" 
-              matBadgeOverlap="false">
+          <mat-card-header>
+            <mat-icon class="ml-2"> read_more </mat-icon>
+            <mat-card-title
+              [matBadge]="ongoing.length"
+              matBadgeColor="warn"
+              matBadgeOverlap="false"
+            >
               Ongoing
             </mat-card-title>
-          </mat-card-header>  
-        </div>      
-            <div class="pt-2">
-              <mat-card class="myc"  
-                *ngFor="let item of ongoing;let i=index" 
-                [id]="i" 
-                (dblclick)="doubleClick(2,$event)" 
-                matTooltip="Double click to edit or delete task"
-                [matTooltipPosition]="positionOptions[3]"
-                matTooltipHideDelay="100"
-                cdkDrag>
-                <div class="mycardongoing">
-                </div>
-                <div class="cardData" >
-                  {{item}} 
-                </div>
-              </mat-card>
+          </mat-card-header>
+        </div>
+        <div class="pt-2">
+          <mat-card
+            class="myc"
+            *ngFor="let item of ongoing; let i = index"
+            [id]="i"
+            (dblclick)="doubleClick(2, $event)"
+            matTooltip="Double click to edit or delete task"
+            [matTooltipPosition]="positionOptions[3]"
+            matTooltipHideDelay="100"
+            cdkDrag
+          >
+            <div class="mycardongoing"></div>
+            <div class="cardData">
+              {{ item }}
             </div>
+          </mat-card>
+        </div>
       </mat-card>
     </div>
 
     <!-- done stack -->
     <div class="example-container">
-      <mat-card 
-        class="example-card" 
-        cdkDropList 
-        [cdkDropListData]="done" 
-        (cdkDropListDropped)="drop($event)">
-        <div class="myheader" 
-          [style.background]="doneBG" >
-          <mat-card-header >
-            <mat-icon class="ml-2">
-              done_outline
-            </mat-icon>
-            <mat-card-title 
-              [matBadge]="done.length" 
-              matBadgeColor="warn" 
-              matBadgeOverlap="false">
+      <mat-card
+        class="example-card"
+        cdkDropList
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="myheader" [style.background]="doneBG">
+          <mat-card-header>
+            <mat-icon class="ml-2"> done_outline </mat-icon>
+            <mat-card-title
+              [matBadge]="done.length"
+              matBadgeColor="warn"
+              matBadgeOverlap="false"
+            >
               Done
             </mat-card-title>
-          </mat-card-header> 
-        </div>       
-            <div class="pt-2">
-              <mat-card 
-                class="myc" 
-                *ngFor="let item of done;let i=index" 
-                [id]="i" 
-                (dblclick)="doubleClick(3,$event)" 
-                matTooltip="Double click to edit or delete task"
-                [matTooltipPosition]="positionOptions[3]"
-                matTooltipHideDelay="100"
-                cdkDrag>
-                <div class="mycarddone">
-                </div>
-                <div class="cardData">
-                  {{item}} 
-                </div>
-              </mat-card>
+          </mat-card-header>
+        </div>
+        <div class="pt-2">
+          <mat-card
+            class="myc"
+            *ngFor="let item of done; let i = index"
+            [id]="i"
+            (dblclick)="doubleClick(3, $event)"
+            matTooltip="Double click to edit or delete task"
+            [matTooltipPosition]="positionOptions[3]"
+            matTooltipHideDelay="100"
+            cdkDrag
+          >
+            <div class="mycarddone"></div>
+            <div class="cardData">
+              {{ item }}
             </div>
+          </mat-card>
+        </div>
       </mat-card>
+    </div>
+    <footer
+      class="d-flex justify-content-center myfoot"
+      style="
+        bottom: 0;
+        /* display: flex; */
+        /* align-items: center; */
+        /* align-content: center; */
+        /* margin: auto; */
+        /* justify-content: center; */
+        width: 100%;
+      "
+    >
+      <p class="love">Made with&nbsp;</p>
+      <p style="color: red">❤</p>
+      <p>&nbsp;by PavanKalyan.c</p>
+    </footer>
   </div>
 </div>
