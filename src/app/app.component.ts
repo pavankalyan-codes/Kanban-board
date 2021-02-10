@@ -103,12 +103,16 @@ export class AppComponent {
     switch (type) {
       case 0:
         this.backlog.splice(parseInt(ind), 1);
+        break;
       case 1:
         this.todo.splice(parseInt(ind), 1);
+        break;
       case 2:
         this.ongoing.splice(parseInt(ind), 1);
+        break;
       case 3:
         this.done.splice(parseInt(ind), 1);
+        break;
       default:
         return 'error';
     }
